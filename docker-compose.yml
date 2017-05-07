@@ -1,0 +1,20 @@
+version: '2'
+
+services:
+  postgres:
+    image: 'postgres:9.5'
+    volumes:
+      - 'postgres:/var/lib/postgresql/data'
+    ports:
+      - '5435:5432'
+  website:
+    depends_on:
+      - 'postgres'
+    build: .
+    ports:
+      - '9292:9292'
+    volumes:
+      - '.:/chatbot'
+
+volumes:
+  postgres:
